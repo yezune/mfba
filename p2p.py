@@ -9,8 +9,11 @@ import threading
 import time
 import traceback
 import sys
-import tkinter as tk
 import random
+try:
+    import tkinter as tk # python version 3.x
+except:
+    import Tkinter as tk # python version 2.x
 
 
 def btdebug(msg):
@@ -781,7 +784,7 @@ class BTGui(tk.Frame):
       if self.peerList.size() > 0:
          self.peerList.delete(0, self.peerList.size() - 1)
       for p in self.btpeer.getpeerids():
-         self.peerList.insert( END, p )
+         self.peerList.insert( tk.END, p )
 
 
    def updateFileList( self ):
@@ -791,7 +794,7 @@ class BTGui(tk.Frame):
          p = self.btpeer.files[f]
          if not p:
             p = '(local)'
-         self.fileList.insert( END, "%s:%s" % (f,p) )
+         self.fileList.insert( tk.END, "%s:%s" % (f,p) )
       
       
    def createWidgets( self ):
@@ -823,7 +826,7 @@ class BTGui(tk.Frame):
 
       self.fileList = tk.Listbox(fileListFrame, height=5, 
                         yscrollcommand=fileScroll.set)
-      #self.fileList.insert( END, 'a', 'b', 'c', 'd', 'e', 'f', 'g' )
+      #self.fileList.insert( tk.END, 'a', 'b', 'c', 'd', 'e', 'f', 'g' )
       self.fileList.grid(row=0, column=0, sticky=tk.N+tk.S)
       fileScroll["command"] = self.fileList.yview
 
@@ -850,7 +853,7 @@ class BTGui(tk.Frame):
       
       self.peerList = tk.Listbox(peerListFrame, height=5,
                         yscrollcommand=peerScroll.set)
-      #self.peerList.insert( END, '1', '2', '3', '4', '5', '6' )
+      #self.peerList.insert( tk.END, '1', '2', '3', '4', '5', '6' )
       self.peerList.grid(row=0, column=0, sticky=tk.N+tk.S)
       peerScroll["command"] = self.peerList.yview
       
